@@ -1,0 +1,54 @@
+# Credentials and secrets
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+secrets/
+**/*.pem
+**/*.key
+**/id.json
+**/*-keypair.json
+**/wallet*.json
+# Databases and operational data
+backups/
+storage/
+**/*.db
+**/*.sqlite
+**/*.sqlite3
+**/*.dump
+**/*.sql.gz
+# Runtime and build artifacts
+**/.venv/
+**/node_modules/
+**/__pycache__/
+**/.next/
+**/target/
+**/local-ledger/
+**/test-ledger/
+**/*.log
+**/*.pyc
+# Existing nested repository
+/frontend/
+# Additional credential protection
+**/*.env
+**/*.env.*
+token-allocation-worker/token
+# Historical backups
+**/*.backup*
+**/*.bak
+**/*.before-*
+**/*.step*.bak
+compose.yaml.backup*
+# Accidental empty shell-output files
+/=
+/CACHED
+/[internal]
+/exporting
+/naming
+/reading
+/resolve
+/resolving
+/transferring
+/unpacking
