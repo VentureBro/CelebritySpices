@@ -52,3 +52,6 @@ compose.yaml.backup*
 /resolving
 /transferring
 /unpacking
+/[[]internal]
+**/*.pre-safety-lock-*
+**/*.step*-backup
