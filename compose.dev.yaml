@@ -1,0 +1,19 @@
+name: celebrityspices-development
+services:
+  postgres-dev:
+    image: postgres:16
+    container_name: celebrityspices-postgres-dev
+    environment:
+      POSTGRES_DB: celebrityspices_dev
+      POSTGRES_USER: celebrityspices_dev
+      POSTGRES_PASSWORD: ${CELEBRITYSPICES_DEV_POSTGRES_PASSWORD:?Set a separate development password}
+    ports:
+      - "127.0.0.1:55432:5432"
+    volumes:
+      - celebrityspices_dev_data:/var/lib/postgresql/data
+    networks:
+      - celebrityspices_dev_network
+volumes:
+  celebrityspices_dev_data:
+networks:
+  celebrityspices_dev_network:

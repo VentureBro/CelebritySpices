@@ -77,9 +77,11 @@ def rpc(method, params=None):
 
 
 def database_connection():
+    if os.environ.get("CELEBRITYSPICES_DEV_DB_ALLOWED") != "1" or not os.environ.get("POSTGRES_DB", "").endswith("_dev"):
+        raise RuntimeError("Development database connection blocked: explicit authorization and _dev database required")
     return psycopg.connect(
         host="127.0.0.1",
-        port=5432,
+        port=55432,
         dbname=os.environ["POSTGRES_DB"],
         user=os.environ["POSTGRES_USER"],
         password=os.environ["POSTGRES_PASSWORD"],

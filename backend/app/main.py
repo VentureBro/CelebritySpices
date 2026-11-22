@@ -1,3 +1,4 @@
+import os
 from contextlib import asynccontextmanager
 from datetime import datetime, timezone
 
@@ -61,6 +62,15 @@ def health():
 
 @app.get("/database/health", tags=["System"])
 def database_health():
+    if os.getenv("CELEBRITYSPICES_DEV_DB_ALLOWED") == "1":
+        try:
+            with engine.connect() as connection:
+                database_name = connection.execute(text("SELECT current_database()")).scalar_one()
+                if database_name != "celebrityspices_dev":
+                    raise HTTPException(status_code=503, detail="Unexpected development database")
+                return {"database": database_name, "status": "healthy"}
+        except SQLAlchemyError as exc:
+            raise HTTPException(status_code=503, detail=f"Database connection failed: {exc.__class__.__name__}") from exc
     try:
         with engine.connect() as connection:
             result = connection.execute(
